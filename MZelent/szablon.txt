@@ -1,0 +1,84 @@
+----
+Generuj plik: zadanie2.html
+Wpisz zawartość wg szablonu:
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Document</title>
+    </head>
+    <body>
+      
+    </body>
+    </html>
+
+----
+Mówi jak strona powinna być wyświetlana na urządzeniu mobilnym (tylko). 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    - width, height – określają szerokość i wysokość wyświetlanego obszaru strony. 
+      Możemy podać wartość liczbową (w pikselach), np.
+          <meta name="viewport" content="width=320, height=480">
+      Dla dyrektywy width możemy również podać specjalną wartość device-width, 
+        której użycie powoduje, że szerokość obszaru wyświetlania jest równa 
+        szerokości ekranu urządzenia (tzn. strona jest rozciągnięta w 100% na ekranie urządzenia).
+      Dla dyrektywy height możemy użyć analogicznej wartości, device-height.
+
+    - initial-scale – w dyrektywie tej ustawiamy domyślne przybliżenie (zoom) dla strony. 
+      Wartość ta jest zazwyczaj zależna od przeglądarki, lecz możemy wymusić 
+      by nasza mobilna wersja strony domyślnie wyświetlała się w 10-krotnym przybliżeniu:
+          <meta name="viewport" content="initial-scale=10">
+      Możemy ją również pokazać w całej swej okazałości, bez skalowania:
+          <meta name="viewport" content="initial-scale=1">
+
+    - minimum-scale, maximum-scale – jak łatwo się domyślić, dyrektywy te określają 
+      minimalne i maksymalne przybliżenie/oddalenie strony w obszarze przeglądarki.
+      Minimalny współczynnik skalowania nie może być mniejszy niż 0, natomiast maksymalny
+      nie może być większy niż 10. Prosty przykład użycia:
+          <meta name="viewport" content="minimum-scale=1, maximum-scale=5">
+
+    - user-scalable – pozwala włączyć, bądź też wyłączyć skalowanie strony. Jako wartość przyjmuje anglojęzyczne yes lub no.
+          <meta name="viewport" content="user-scalable=yes">
+
+    Nigdy nie używaj maximum-scale=1.0!
+      Blokujesz możliwość powiększania treści Twojej strony.
+
+----
+Sekcja: 
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    wymusza na IE, żeby użył najnowszej wersji silnika
+
+
+----
+Popraw kodowanie polsich znaków na pl i kodowanie znaków w standardzie UTF-8:
+
+    <!DOCTYPE html>
+    <html lang="pl">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Document</title>
+    </head>
+    <body>
+
+    </body>
+    </html>
+
+----
+Poprawne kodowanie polskich znaków:
+Otwórz ten plik w Notepad++ i zmień Format na:
+  Koduj w UTF-8 (bez BOM) 
+
+----
+BOM (ang. Byte Order Mark), znacznik kolejności bajtów[1] 
+  – znak niedrukowalny używany w wielobajtowym kodowaniu znaków, 
+  który jest zapisywany na początku strumienia bajtów (pliku) i informuje, 
+  w jakiej kolejności należy ustawić bajty, aby odczytać kod znaku. 
+  BOM rozwiązuje problem interpretacji kolejności bajtów w znaku i umożliwia 
+  automatyczną detekcję kodowania UTF-8, UTF-16LE, UTF-16BE, UTF-32LE oraz UTF-32BE. 
+
+
