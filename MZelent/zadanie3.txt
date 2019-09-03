@@ -1,42 +1,31 @@
 ----
-Generuj plik: zadanie2.html z szablonu 
+Zadanie: pokaż przedział z podanych przez użytkownika liczb całkowitych 
+----
+Generuj plik: zadanie3.html z szablonu 
 
 ----
 Wpisz w sekcji body pole tekstowe i przycisk:
 
     <body>
       <input  type="text" >
-      <input type="submit" value="Sprawdź">
+      <input  type="text" >
+      <input type="submit" value="Pokaż">
     </body>
 
 ----
-Zadanie do wykonania: sprawdzenie czy podana liczba jest: 
-  - dodatnia, 
-  - ujemna 
-  - czy równa 0;
+Do realizacji utwórzmy funkcję generuj()
 
-  Przeglądarka (szef) wywołuje do pracy konkretną funkcję (pracownika).
-
-
-----
-Do realizacji utwórzmy funkcję sprawdz()
-
-    function sprawdz() 
+    function generuj() 
     {
-      // pobierz wartość z pola tekstowego
-      // dowiedz sie jaka to liczba 
-      // pokaż komentarz
+      // pobierz wartości z pól tekstowych 
+      // 
+      // pokaż wynik
     }
 
 ----
 Plan działania: 
-  1. pobierz wartość z pola tekstowego
-  2. decyduj jaka to liczba
-  3. pokaż odpowiedni komunikat na ekranie
-  
-  1. pobierz uchwyt przez: 
+  1. pobierz uchwyt przez odczytanie identyfikatorów (id="pole"): 
       uchwyt = document.getElementById("id")
-    Żeby to zrobić dodac do pola tekstowego jego identyfikator (id="pole")
     Napisz:
       - znaczniki: script, 
       - pobierz wartość pole, 
@@ -50,7 +39,7 @@ Plan działania:
           </script>
 
         !!!! sprawdz (co zrobiliśmy źle, czemu nie działa)
-      - dodaj onclick="sprawdz()" pod przycisk
+      - dodaj onclick="sprawdz()"
           <input type="submit" value="Sprawdź" onclick="sprawdz()" >
 
   2. decyduj jaka to liczba
