@@ -1,0 +1,82 @@
+----
+Generuj plik: zadanie2.html z szablonu 
+
+----
+Wpisz w sekcji body pole tekstowe i przycisk:
+
+    <body>
+      <input  type="text" >
+      <input type="submit" value="Sprawdź">
+    </body>
+
+----
+Zadanie do wykonania: sprawdzenie czy podana liczba jest: 
+  - dodatnia, 
+  - ujemna 
+  - czy równa 0;
+
+  Przeglądarka (szef) wywołuje do pracy konkretną funkcję (pracownika).
+
+
+----
+Do realizacji utwórzmy funkcję sprawdz()
+
+    function sprawdz() 
+    {
+      // pobierz wartość z pola tekstowego
+      // dowiedz sie jaka to liczba 
+      // pokaż komentarz
+    }
+
+----
+Plan działania: 
+  1. pobierz wartość z pola tekstowego
+  2. decyduj jaka to liczba
+  3. pokaż odpowiedni komunikat na ekranie
+  
+  1. pobierz uchwyt przez: 
+      uchwyt = document.getElementById("id")
+    Żeby to zrobić dodac do pola tekstowego jego identyfikator (id="pole")
+    Napisz:
+      - znaczniki: script, 
+      - pobierz wartość pole, 
+      - pokaż na ekranie, 
+          <script>
+            function sprawdz() 
+            {  
+              var liczba = document.getElementById("pole").value;
+              document.write(liczba);
+            }
+          </script>
+
+        !!!! sprawdz (co zrobiliśmy źle, czemu nie działa)
+      - dodaj onclick="sprawdz()"
+          <input type="submit" value="Sprawdź" onclick="sprawdz()" >
+
+  2. decyduj jaka to liczba
+      - Dodaj div'a do body
+        <div id="wynik">  </div>
+
+        <script>
+            function sprawdz()
+            {  
+              var liczba = document.getElementById("pole").value;
+
+              if (liczba > 0)       document.getElementById("wynik").innerHTML = "dodatnia";
+              else if (liczba<0)    document.getElementById("wynik").innerHTML = "ujemna";
+              else if (liczba===0)  document.getElementById("wynik").innerHTML = "zero";
+              else                  document.getElementById("wynik").innerHTML = "To nie jest liczba";
+            }
+          </script>
+
+          <body>
+            <input  type="text" id="pole">
+            <input type="submit" value="Sprawdź" onclick="sprawdz()" >
+
+            <div id="wynik">  </div>
+          </body>
+      - problemem może być  .innerHTML. Jeśli wpiszesz innerHtml nie będzie działać. 
+
+
+
+
