@@ -4,12 +4,12 @@ Zadanie: pokaż przedział z podanych przez użytkownika liczb całkowitych
 Generuj plik: zadanie3.html z szablonu 
 
 ----
-Wpisz w sekcji body pole tekstowe i przycisk:
+Wpisz w sekcji body 2 pola tekstowe, przycisk i pole wyniku:
 
     <body>
       <input  type="text" >
       <input  type="text" >
-      <input type="submit" value="Pokaż">
+      <input type="submit" value="Generuj">
     </body>
 
 ----
@@ -24,47 +24,33 @@ Do realizacji utwórzmy funkcję generuj()
 
 ----
 Plan działania: 
-  1. pobierz uchwyt przez odczytanie identyfikatorów (id="pole"): 
-      uchwyt = document.getElementById("id")
-    Napisz:
-      - znaczniki: script, 
-      - pobierz wartość pole, 
-      - pokaż na ekranie, 
-          <script>
-            function sprawdz() 
-            {  
-              var liczba = document.getElementById("pole").value;
-              document.write(liczba);
-            }
-          </script>
-
-        !!!! sprawdz (co zrobiliśmy źle, czemu nie działa)
-      - dodaj onclick="sprawdz()"
-          <input type="submit" value="Sprawdź" onclick="sprawdz()" >
-
-  2. decyduj jaka to liczba
-      - Dodaj div'a do body
-        <div id="wynik">  </div>
-
+    - dodaj znaczniki: <script></script> 
+    - dodaj identyfikatory do pól i przycisku
+    - pobierz wartość pól do zmiennych korzystając z uchwytów i atrybutów, 
+    - pokaż na ekranie, 
         <script>
-            function sprawdz()
-            {  
-              var liczba = document.getElementById("pole").value;
+          function generuj() 
+          {  
+            ....
+          }
+        </script>
 
-              if (liczba > 0)       document.getElementById("wynik").innerHTML = "dodatnia";
-              else if (liczba<0)    document.getElementById("wynik").innerHTML = "ujemna";
-              else if (liczba===0)  document.getElementById("wynik").innerHTML = "zero";
-              else                  document.getElementById("wynik").innerHTML = "To nie jest liczba";
-            }
-          </script>
+    - dodaj pętlę for do generowania ciągu liczbowego (js)
+      Wynik zapisz do diva: wynik; 
 
-          <body>
-            <input  type="text" id="pole">
-            <input type="submit" value="Sprawdź" onclick="sprawdz()" >
+    - dodaj div'a do body (html);
+      <div id="wynik">  </div>
 
-            <div id="wynik">  </div>
-          </body>
-      - problemem może być  .innerHTML. Jeśli wpiszesz innerHtml nie będzie działać. 
+    - dodaj onclick="generuj()"
+        <input type="submit" value="Generuj" onclick="generuj()" >
+
+
+
+
+
+
+
+    - problemem może być  .innerHTML. Jeśli wpiszesz innerHtml nie będzie działać. 
 
 
 
