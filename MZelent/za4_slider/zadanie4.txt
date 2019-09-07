@@ -1,0 +1,59 @@
+----------------
+Zadanie: pokaż slider ze zdjęciami
+----------------
+
+----
+Generuj plik: zadanie 4 z szablonu 
+
+----
+Wpisz w sekcji body 2 pola tekstowe, przycisk i pole wyniku:
+
+    <body>
+      <input  type="text" >
+      <input  type="text" >
+      <input type="submit" value="Generuj">
+    </body>
+
+----
+Do realizacji utwórzmy funkcję generuj()
+
+    function generuj()
+    {
+      // pobierz wartości z pól tekstowych 
+      // 
+      // pokaż wynik
+    }
+
+----
+Plan działania: 
+    - dodaj znaczniki: <script></script> 
+    - dodaj identyfikatory do pól i przycisku
+    - pobierz wartość pól do zmiennych korzystając z uchwytów i atrybutów, 
+    - pokaż na ekranie, 
+        <script>
+          function generuj() 
+          {  
+            ....
+          }
+        </script>
+
+    - dodaj pętlę for do generowania ciągu liczbowego (js)
+      Wynik zapisz do diva: wynik; 
+
+    - dodaj div'a do body (html);
+      <div id="wynik">  </div>
+
+    - dodaj onclick="generuj()"
+        <input type="submit" value="Generuj" onclick="generuj()" >
+
+
+
+
+
+
+
+    - problemem może być  .innerHTML. Jeśli wpiszesz innerHtml nie będzie działać. 
+
+
+
+
