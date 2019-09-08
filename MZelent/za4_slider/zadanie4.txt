@@ -1,59 +1,173 @@
 ----------------
-Zadanie: pokaż slider ze zdjęciami
+Zadanie: pokaż slider ze zdjęciami. 
+Zdjęcia mają się pokazywać co 5 sekund.
+Należy dodać numery zdjęć nad sliderem. 
+Numery po kliku pokażą numer wybranego zdjęcia.  
 ----------------
 
 ----
-Generuj plik: zadanie 4 z szablonu 
+Generuj plik: zadanie 4 z szablonu z CSS z ciemnym tłem i białą czcionką
+    <style>
+      body{
+        background-color: #222222;
+        font-size: 20px;
+        color: white;
+      }
+    </style>
+
 
 ----
-Wpisz w sekcji body 2 pola tekstowe, przycisk i pole wyniku:
+W sekcji body dodaj diva do którego włożymy slidera:
 
     <body>
-      <input  type="text" >
-      <input  type="text" >
-      <input type="submit" value="Generuj">
+      <div id="slider"></div>
     </body>
 
-----
-Do realizacji utwórzmy funkcję generuj()
 
-    function generuj()
-    {
-      // pobierz wartości z pól tekstowych 
-      // 
-      // pokaż wynik
+----
+Utwórz funkcję zmienSlajd(),  dodaj znaczniki: <script></script> 
+    <script type="text/javascript">
+      function zmienSlajd()
+      { 
+      }
+    </script>
+
+----
+Podepnij funkcję zmienSlajd() pod zdarzenie. 
+Ale pod jakie zdarzenie, bo slide ma się sam zmieniać co 5 sek
+i strona ma się pojawić na początku ładowania strony:
+    <body onload="zmienSlajd()">
+
+----
+Użyjemy instrukcji setTimeout("funkcja", czas) aby zmienić slajd
+Ale trzeba wiedzieć jaki to numer slajdu.
+Numer ma być zmienną globalną - widoczna w całym dokumencie - 
+która początkowo przyjmuje liczbę od 1 do 4; 
+Użyj funkcji random która generuje liczby od 0 więc zwiększam liczby o 1;
+
+  <script type="text/javascript">
+    var numer = Math.floor(Math.random()*4)+1;
+
+
+----
+Zmień slajd na kolejny:
+Jeśli numer jest większy od 4 to zmień slajd na 1.
+    function zmienSlajd()
+    { 
+      numer++;
+      if(numer>4) numer=1;
     }
 
 ----
-Plan działania: 
-    - dodaj znaczniki: <script></script> 
-    - dodaj identyfikatory do pól i przycisku
-    - pobierz wartość pól do zmiennych korzystając z uchwytów i atrybutów, 
-    - pokaż na ekranie, 
-        <script>
-          function generuj() 
-          {  
-            ....
-          }
-        </script>
+Utwórz katalog: slajdy gdzie umieść 4 filmy:
+Wczytaj każdy plik do diva: slider
+Można wczytać każdy plik za pomocą if'ów 
+albo odczytać nazwę obrazka dynamicznie 
+    var plik = "<img src=\"slajdy/Film"+ numer+".jpg\" />";
+    document.getElementById("slider").innerHTML = plik;
 
-    - dodaj pętlę for do generowania ciągu liczbowego (js)
-      Wynik zapisz do diva: wynik; 
+Jeśli chcemy mieć znak " między "" należy użyć: / - lewego ukośnika - 
+wtedy otrzymasz: <img src="slajdy/Film1.jpg" />
 
-    - dodaj div'a do body (html);
-      <div id="wynik">  </div>
 
-    - dodaj onclick="generuj()"
-        <input type="submit" value="Generuj" onclick="generuj()" >
+----
+Po zmienie slajdu funckcja ma znowu się wykonać: 
+      // zmień slajd co 5 sekund
+      setTimeout("zmienSlajd()",5000);
 
+----
+Zobacz w przeglądarce: zadanie4_1.html
+----------------
 
 
 
+----
+Wszystko dobrze ale nie ma animacji: 
+płynnego pojawiania się i zanikania slajdów.
+Skorzystajmy z biblioteki jQuery:
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+
+----
+Dzięki temu uzyskamy efekt płynnego pojawiania się obrazów
+a efekt pojawiania się slajdu trwa 500 milisek. 
+    $("#slider").fadeIn(500);
 
 
+----
+Jeśli się pojawia to powinna też zanikać po ok 4,5s
+Zanikanie wywołaj instrukcją: setTimeout z nową funkcją: schowaj
+    setTimeout("schowaj()",4500);
 
-    - problemem może być  .innerHTML. Jeśli wpiszesz innerHtml nie będzie działać. 
+Funkcję: schowaj umieść przed funkcją: zmienSlajd(). 
+Zanikanie ma trwać również 500ms. 
+    function schowaj() {
+      $("#slider").fadeOut(500);
+    }
+
+----
+Zobacz w przeglądarce: zadanie4_2.html
+----------------
 
 
+----
+Chcemy dodać numerki nad tym sliderem 
+ żeby można było samodzielnie dodać slajdy.
+W sekcji body dodamy numer slajdu 
+    [ 1 ][ 2 ][ 3 ][ 4 ]
+Ale żeby przypisać onclick do tego tekstu 
+trzeba otoczyć ten tekst div'em albo w spanie.
+span będzie wygodniejszy.
+Do onclick's przypisz funkcję: ustawSlajd i łapkę na kursorze 
+
+    <span onclick="ustawSlajd(1)" style="cursor: pointer;">[ 1 ]</span>
+    <span onclick="ustawSlajd(2)" style="cursor: pointer;">[ 2 ]</span>
+    <span onclick="ustawSlajd(3)" style="cursor: pointer;">[ 3 ]</span>
+    <span onclick="ustawSlajd(4)" style="cursor: pointer;">[ 4 ]</span>
 
 
+----
+Dodaj funkcję: ustawSlajd(nrSlajdu)
+Kliknięcie powinno przywracać licznik czasu na kolejne 5 sek.
+Ale jak zatrzymać licznik czasu: 
+    clearTimeout(nazwaTimera);
+Aby ją zatrzymać musi być globalna nazwa timera:
+Do zresetowania licznika czasu potrzebujemy 2 timerów
+    var timer1 = 0;
+    var timer2 = 0;
+
+I w funkcji:  zmienSlajd() przypisuję zmienne pod timery:
+    timer1 = setTimeout("zmienSlajd()",5000);
+    timer2 = setTimeout("schowaj()",4500);
+
+I dopiero teraz:  
+    function ustawSlajd(nrSlajdu) {
+      // można przerwać odliczanie wewnątrz funkcji
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      
+      // ten slajd ma być zmieniany i pomniejszony o 1
+      numer = nrSlajdu -1;
+
+      // teraz chowasz slajd i pokazujesz wybrany
+      schowaj();
+      setTimeout("zmienSlajd()",500);
+    }
+
+
+----
+Zobacz w przeglądarce: zadanie4_3.html
+----------------
+
+----
+Zatrzymaj aktualną animację na elemencie:
+    function schowaj() {
+      $("#slider").stop();
+      $("#slider").fadeOut(500);
+    }
+
+
+----
+Zobacz w przeglądarce: zadanie4_4.html
+----------------

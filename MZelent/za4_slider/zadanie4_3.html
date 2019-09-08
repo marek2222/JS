@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Zadanie</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <style>
+    body{
+      background-color: #222222;
+      font-size: 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body onload="zmienSlajd()">
+  
+  <!-- do samodzielnej zmiany obrazka po kliknięciu na niego -->
+  <!-- kliknięcie powinno przywracać licznik czasu na kolejne 5 sek -->
+
+  <span onclick="ustawSlajd(1)" style="cursor: pointer;">[ 1 ]</span>
+  <span onclick="ustawSlajd(2)" style="cursor: pointer;">[ 2 ]</span>
+  <span onclick="ustawSlajd(3)" style="cursor: pointer;">[ 3 ]</span>
+  <span onclick="ustawSlajd(4)" style="cursor: pointer;">[ 4 ]</span>
+
+  <div id="slider"></div>
+
+  
+  <script type="text/javascript">
+    // zmienna globalna która losuje liczbę od 1 do 5; 
+    // random generuje od 0 więc zwiększam liczby o 1;
+    var numer = Math.floor(Math.random()*4)+1;
+
+    // do zresetowania licznika czasu potrzebujemy 2 timerów
+    var timer1 = 0;
+    var timer2 = 0;
+
+    function ustawSlajd(nrSlajdu) {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      numer = nrSlajdu -1;
+
+      schowaj();
+      setTimeout("zmienSlajd()",500);
+    }
+
+    function schowaj() {
+      $("#slider").fadeOut(500);
+    }
+
+    function zmienSlajd()
+    { 
+      // zmień numer slajdu na kolejny
+      numer++;
+      // jeśli numer jest większy od 5 to zmień na 1 slajd
+      if(numer>4) numer=1;
+
+      // można wczytać każdy plik za pomocą if'ów 
+      // albo odczytać nazwę obrazka dynamicznie 
+      var plik = "<img src=\"slajdy/Film"+ numer+".jpg\" />";
+      // jeśli chcemy mieć znak " między "" należy użyć: / - lewego ukośnika
+      // wtedy otrzymasz: <img src="slajdy/Film1.jpg" />
+      
+      // pokaż w sliderze
+      document.getElementById("slider").innerHTML = plik;
+      
+      // płynne pojawianie i zanikanie obrazów przez jQuery
+      $("#slider").fadeIn(500);
+      
+      // zmień slajd co 5 sekund
+      timer1 = setTimeout("zmienSlajd()",5000);
+
+      // utwórz i wywołaj funkcję schowaj po 4,5s
+      timer2 = setTimeout("schowaj()",4500);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Zadanie</title>
+  <style>
+    body{
+      background-color: #222222;
+      font-size: 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body onload="zmienSlajd()">
+
+  <div id="slider"></div>
+
+  
+  <script type="text/javascript">
+    // zmienna globalna która losuje liczbę od 1 do 4; 
+    // random generuje od 0 więc zwiększam liczby o 1;
+    var numer = Math.floor(Math.random()*4)+1;
+
+    function zmienSlajd()
+    { 
+      // zmień numer slajdu na kolejny
+      numer++;
+      // jeśli numer jest większy od 5 to zmień na 1 slajd
+      if(numer>4) numer=1;
+
+      // można wczytać każdy plik za pomocą if'ów 
+      // albo odczytać nazwę obrazka dynamicznie 
+      var plik = "<img src=\"slajdy/Film"+ numer+".jpg\" />";
+      // jeśli chcemy mieć znak " między "" należy użyć: / - lewego ukośnika
+      // wtedy otrzymasz: <img src="slajdy/Film1.jpg" />
+      
+      // pokaż w sliderze
+      document.getElementById("slider").innerHTML = plik;
+      
+      // zmień slajd co 5 sekund
+      setTimeout("zmienSlajd()",5000);
+    }
+  </script>
+
+</body>
+</html>
