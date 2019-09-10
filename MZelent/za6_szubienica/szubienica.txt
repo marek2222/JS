@@ -15,11 +15,17 @@ Zadanie pozwala na zrozumienie jak przetwarzane są napisy,
 czyli tzw. łańcuchy (stringi).
 
 
+
+----
+Korzystamy z szablonu z plikami: szablon.
+------------------------
+------------------------
+etap_1
+
 ----
 Etapy pracy:
 
 ----
-Korzystamy z szablonu z plikami: szablon.
 W szubienica.html mamy zewnętrzny plik: style.css 
 i zewnętrzny plik js: szubienica.js.
 
@@ -69,4 +75,110 @@ W div'ie id="pojemnik" umieść wszystkie pozostałe divy:
 	- wyczyść floaty przez:
 			<div style=clear:both"></div>
 
-13:18
+	
+---
+Dodaj do div id="szubienica" znacznik img z pierwszym obrazkiem  
+
+------------------------
+------------------------
+Zobacz stronę w przeglądarce.
+
+
+------------------------
+------------------------
+etap_2
+---
+Ustaw 
+- wysokość div id="plansza" na 60px ;
+- wysokość div'a szubienica na 280px
+- wysokość div'a alfabet na 280px
+	ponieważ wysokość obrazka jest właśnie taka. 
+Te wysokości traktuj jako minimalne, 
+oczywiście mogą być większe jeśli rozszerzysz obrazek.
+
+Jeśli nie ustawisz minimalnej wysokości, 
+a będziesz zmieniał/a obrazek przed wczytaniem kolejnego obrazka
+to przez moment wysokość pustego diva wyniesie 0.
+Minimalna wysokość zabezpiecza przed tym.
+
+
+---
+Przejdzmy na plik: szubienica.js:
+	- wpisz zmienną haslo = "Bez pracy nie ma kołaczy";
+	- dodaj funcję: pokaz_haslo() która wpisze hasło do diva plansza.
+	- podepnij funkcję pod zdarzenie onload 
+		a). przez window.onload = pokaz_haslo; lub 
+		b). przez <body onload=""></body>  
+
+
+---
+---
+Zobacz stronę w przeglądarce. 
+
+
+------------------------
+------------------------
+etap_3
+
+---
+Hasło powinno być napisane wielkimi literami.
+Powinno być zasłonięte ponieważ nie nacisneliśmy jeszcze 
+żadnego przycisku, a w miejsca liter powinny być podkreśliniki "_".
+
+---
+Hasło wielkimi literami zrób w JS.
+Spróbuj zasłonić hasło i je pokazać.
+
+Plan 'wykreskowania' hasła i zapisania w zmiennej haslo1:
+- Pętla for która wykona się tyle razy ile znaków jest w haśle
+- w każdej iteracji pętli, do zmiennej haslo1 doklejamy 
+	albo myślnik (gdy znajdziemy literę) albo spację w oryginalnym haśle.
+
+
+!!!!!!!!!!!!!!!
+Uwaga!!! Nie możemy przy łańcuchach używać notacji 
+z nawiasami kwadratowymi []. Jest to baaaardzo niebezpieczne 
+i działa nieprzewidywalnie. 
+	  haslo1 = (haslo[i] == " ") ? haslo1 + " ": haslo1+ "-";  
+
+Zamiast tego tak dostaniemy się do konkretnego znaku przez funkcję charAt():
+		haslo.charAt(5)  -- czyli: znak przy danym numerze w łańcuchu
+
+Inny sposób to konwersja łańcucha tdo tablicy funkcją: split()
+Dlatego zamień wyrażenie na:
+	  haslo1 = (haslo.charAt(i) == " ") ? haslo1 + " ": haslo1+ "-";  
+		
+
+---
+Zobacz stronę w przeglądarce. 
+
+---
+Wszystko fajnie działa ale brakuje nam literek po prawej, 
+które można by kliknąć i sprawdzić w tym zakreskowanym haśle.
+Prygotuj więc skrypt js do wygenerowania zawartości diva alfabet.
+Napisz funkcję np. start.
+Jeśli ktoś kliknię literkę E to ta literka ma się podświetlić na zielono 
+jeśli jest znajdzie się w haśle a na czerwono jeśli jej brak. 
+Literka raz użyta ma być już do końca gry nieaktywna.
+
+
+---
+Zmień 
+		window.onload = pokaz_haslo; na 
+		window.onload = start;
+a w funkcji start() na końcu dodaj wywołanie funkcji pokaz_haslo().
+
+---
+W funkcji start() 
+	- dodaj zmienną tresc_diva - gdzie umieścisz alfabet
+		czyli poszczególne 35 liter alfabetu.
+	- wypełnij div alfabet zmienną tresc_diva.
+
+	Zmienna tresc_diva ma posiadać 35 liter, 
+	z których każda litera zamknij w ramce (borderze).
+	Można to podzielić na 5 wierszy po 7 kolumn.
+	Dodaj klasę opisującą każdą z tych liter o nazwie: litera. 
+
+	
+
+39:01
