@@ -179,6 +179,105 @@ W funkcji start()
 	Można to podzielić na 5 wierszy po 7 kolumn.
 	Dodaj klasę opisującą każdą z tych liter o nazwie: litera. 
 
-	
+	Zacznij od zrobienia pętli która wykona się 35 razy.
+	I w każdej iteracji dodamy jednego diva klasy .litera.
+	W stylach dodaj klasę .litera, gdzie: 
+		- wysookość i szerokść to 30px
+		- jest wyśrodkowany text
+		- padding: 5px
+		- margines: 5
+				czyli mamy 40 px na jedną literkę.
+		- ramka(border) 3px solid grey; 
+		- dosuń do lewej(float: left;)
+  	- i dodaj łapkę po najechaniu
 
-39:01
+	W js w każdej iteracji pętli for dokładamy:
+	    tresc_diva = tresc_diva + '<div class="litera">A</div>';     
+
+---
+Zobacz stronę w przeglądarce. 
+
+
+---
+Spróbuj zakrąglić rogi w obramowaniu i zobacz to w przeglądarce. 
+
+
+---
+Zawiń literki aby przedstawiały układ 7x5 w js.
+Możesz użyć do tego celu modulo (%).
+
+
+---
+Teraz przypisz wszystkie literki alfabelu do kolejnych div'ów.
+		- Utwórz tablicę (array) z literkami pod zmienną: litery.
+				var litery = new Array(35);
+			Należy wypełnić jaki jest rozmiar tablicy (35 znaków).
+			litery[] to tablica przechowująca 35 łańcuchów;
+			do tablicy możesz stosować notacje z nawiasami [].
+		- Użyj tablicę: litery do wypełnienia div'ów.
+					tresc_diva = tresc_diva + '<div class="litera">'+ litery[i]+'</div>';     
+
+
+---
+Pokaż podświetlenie wszystkich literek w CSS.
+		.litera:hover
+Uwaga: po dwukropku nie dawaj spacji bo przestanie działać.
+		Ustaw:
+		- czarny kolor tła;
+		- bialy kolor tekstu;
+		- ramka 3px ciągła biała;
+
+
+---
+Trzeba dodać reakcję na kliknięcie danej literki:
+	czy istnieje ta literka w haśle: 
+	- jeśli tak to pokaż wszystkie jej wystąpienia, 
+	- jeśli nie to zostanie narysowany pierwszy element szubienicy.
+Pamiętaj, że kliknięta litera ma zmienić kolor na zielony albo czerwony.
+Należy także dezaktywować literkę, nie powinna być ona klikalna.
+
+Więc czy należy użyć 35 funkcji do obsługi wszystkich przycisków?
+Można stworzyć jedną funkcję, ale taką do której wyślemy numer diva 
+jako argument: 
+		sprawdz(nr)
+Ale musisz wiedzieć którego div'a szukasz, który jest aktualny.
+Żeby to zrobić należy nadać div'om identyfikatory: lit0, lit1  ... lit34
+
+
+---
+JS: Wewnątrz pętli przygotuj sobie nazwę div'a. 
+    var element = 'lit'+i;
+    tresc_diva = tresc_diva + '<div class="litera" id="'+ element +'">'+ litery[i]+'</div>';     
+
+
+---
+58:41
+JS: Utwórz funkcję która będzie wywoływana w momencie kliknięcia na daną literę.
+Napisz funkcję (na dole dokumentu, za funkcją start()): 
+		sprawdz(nr)
+		gdzie: nr - będzie argumentem, z przedziału od 0 do 34
+Testuj tą funkcję wpisując do niej alert z argumentem: nr 
+oznaczającym numer literki.
+	  alert(nr);
+Dodaj do div'a każdego z literek zdarzenie onclick z funkcją: sprawdz(nr)
+    var element = 'lit'+i;
+    tresc_diva = tresc_diva 
+      + '<div class="litera" onclick="sprawdz('+i+')" id="'+ element +'">'+ litery[i]+'</div>';     
+
+
+
+---
+Zobacz stronę w przeglądarce. 
+Teraz usuń roboczego alerta z funkcji: sprawdz(nr)
+
+
+------------------------
+------------------------
+etap_4  
+1:01:33
+
+
+
+
+
+
