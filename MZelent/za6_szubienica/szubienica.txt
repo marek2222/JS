@@ -168,6 +168,7 @@ Zmień
 		window.onload = start;
 a w funkcji start() na końcu dodaj wywołanie funkcji pokaz_haslo().
 
+
 ---
 W funkcji start() 
 	- dodaj zmienną tresc_diva - gdzie umieścisz alfabet
@@ -268,16 +269,303 @@ Dodaj do div'a każdego z literek zdarzenie onclick z funkcją: sprawdz(nr)
 
 ---
 Zobacz stronę w przeglądarce. 
+Przejdź na jakąś literkę i przez prawy przycisk myszy wybierz Inspect.
+Zobacz jak wygląda kod wygenerowany przezz javascript.
+
 Teraz usuń roboczego alerta z funkcji: sprawdz(nr)
 
 
 ------------------------
 ------------------------
 etap_4  
-1:01:33
+
+---
+Teraz w funkcji sprawdz(nr) wpisz kod, który sprawdzi czy w odgadywanym haśle 
+znajduje się kliknięta przez nas literka. 
+Przejdź do każdej litery hasła i sprawdź czy nie jest ona poszukiwaną
+przez nas literką a jeśli tak to w zmiennej: haslo1 odsłoń 
+każde jej wystąpienie.
+
+R: Napisz pętlę for która wykona się tyle razy ile liter jest w haśle. 		
+Sprawdź czy aktualnie rozpatrywany znak hasła jest równy znakowi 
+o numerze: nr.
+		for(var i=0; i<dlugosc; i++){
+			if(haslo.charAt(i) == litery[nr]){
+				alert(i);
+			}
+		}
+
+---
+Zobacz stronę w przeglądarce. 
+Po kliku literki E otrzymasz numer 1 i 12.
+Oznacza to że literka E znajduje się na pozycji 2 i 13 w haśle.
+Zobacz jeszcze literkę B, a otrzymasz 0.
+
+
+---
+R: Napisz pętlę for która wykona się tyle razy ile liter jest w haśle. 		
+Sprawdź czy aktualnie rozpatrywany znak hasła jest równy znakowi 
+o numerze: nr.
+  for(var i=0; i<dlugosc; i++){
+    if(haslo.charAt(i) == litery[nr]){
+      haslo1.charAt(i) = litery[nr];
+    }
+  }
+
+---
+Zobacz stronę w przeglądarce. 
+Zobacz dlaczego nic się nie dzieje po kliknięciu w literkę. 
+Zobacz czy Narzędziach developerskich na zakłądce Console nie ma błędów?
+Przejdź do zakąłdki Sources i otwórz szubienica.js. Zobacz gdzie jest błąd?
+O co chodzi?
+	Funkcji charAt() możemy użyć po prawej stronie przypisania a nie po lewej.
+	Ta funkcja zapewnia odczyt ale nie zapis.
+Więc co zrobić? Jak ten znak podmienić na wybranej pozycji.
+
+
+---
+Napisz sam funkcję która będzie podmieniać nam znak 
+na zadanej pozycji w łańcuchu. Napisz ją jako wbudowaną funkcję jak: 
+		łąńcuch.funkcja();
+		napis.toUpperCase();
+		napiss.charAt(5);
+Utwórz sam wbudowaną funkcję ustawZnak z parametrami (miejsce, znak):
+R: zabezpiecz się przez zbyt dużą wartością w parametrze: miejsce.
+Przykład: 
+		var napis = "HASŁO";
+		napis.ustawZnak(10,"A");
+Mamy napis w tórym mam 5 liter ale ustawZnak 
+chce podmienić na 10 pozycji znak A. I mam problem.
+Dlatego sprawdź czy miejsce jest większe od długości napisu (this.lenght)
+a jeśli tak to zwróć ten właśnie łańcuch. 
+Dla pewności zwracamy w formie stringa.
+		if(miejsce > this.length - 1)			return this.toString();
+
+Teraz jeśli ktoś podał poprawne miejsce to dodaj kod: 
+  	else return this.substr(0,miejsce) + znak + this.substr(miejsce+1);
+
+Skorzystałem z funkcji: substr = ang.substring
+czyli to jest "podłańcuch" - wyjęty fragment tekstu
+Funkcja istnieje w dwóch wariantach:
+		napis.substr(x,y);	
+		napis.substring(x,z);	
+
+Wracając do naszego if'a:
+    haslo1 = haslo1.ustawZnak(i, litery[nr]);
+
+Na końcu funkcji wywołaj funkcję: 
+	  pokaz_haslo();
+aby pokazać aktualne hasło.
 
 
 
+---
+Zobacz stronę w przeglądarce. 
+Niestety litery są szersze niż myślnk i dlatego jest dyskomfort.
+JAk to zminimalizować?
+Wystarczy użyć czcionki której znaki mają stałą szerokość.
+Jest to czcionka monotypiczna(monospace).
+
+
+---
+W przeglądarce Przechodzimy do witryny: google font
+Na liście Language wybieramy Latin Extended 
+(szukamy tylko czcionek obsługujące polskie ogonki)
+a na liście Categories zaznacz tylko rodzinę czcionek Monospace, 
+a odznacz pozostałe.
+Teraz mam zestawienie fontów w których wszystkie znaki mają stałą szerokość.
+Wybierz czcionkę: Inconsolata
+kliknij na: Select this font
+Przejdź na zakładkę: Family selected i na zakładce CUSTOMIZE (dostosuj)
+zaznacz dodatkowo: bold700 i Latin Extended.
+
+Przejdź na zakładkę: EMBED. 
+Skopiuj wygenerowany link do główki naszego dokumentu HTML. 
+Skopiuj font-family do naszefo CSS's, do sekcji: body
+	  font-family: 'Inconsolata';
+i dodaj jeszcze bolda:
+		font-weight: 700;
+
+
+---
+Zobacz jak teraz wygląda gra i prezentuje się odsłanianie pojedyńczych liter: 
+W momencie odsłaniania liter hasło wcale nie przemieszcza się na ekranie.
+
+
+------------------------
+------------------------
+etap_5  : 1:18:20
+
+
+
+---
+Teraz pozostaje nam dodać do sprawdzania znaków odpowiedznie kolorowanie
+tych div'ów po kliknięciu. Tak żeby kliknięta literka stała się 
+albo zielona albo czerwona - w zależności od tego czy została odnaleziona 
+w haśle czy też nie. Czyli pozostaje nam podmienić odpowiednio styl 
+klikniętego div'a, zawierającego sprawdzaną w haśle literkę. 
+Można to zrobić za pomocą flagi:
+		flaga - zmienna o wartoś ci true/false.
+
+R: Ustaw flagę w funkcji sprawdz(nr) i ustaw kolor tła na zielony: 
+		function sprawdz(nr) {
+			var trafiona = false;   //trafiona literka
+
+			for(var i=0; i<dlugosc; i++){
+				if(haslo.charAt(i) == litery[nr]){
+					haslo1 = haslo1.ustawZnak(i, litery[nr]);
+					trafiona = true;
+				}
+			}
+		  if (trafiona == true) {
+				var element = 'lit' + nr;    
+				document.getElementById(element).style.background = "#003300";
+		    pokaz_haslo();  // pokazanie hasła
+			}
+			else  {
+
+			}
+		}
+
+		- ustaw kolor tekstu na zielony
+		- ustaw kolor obramowania na zielony
+		- zmień wskażnik na domyślny - nie potrzebuję już łapki
+		
+				document.getElementById(element).style.color = "#00C000";
+				document.getElementById(element).style.border = "3px solid #00C000";
+				document.getElementById(element).style.cursor = "default";
+
+
+---
+Teraz literki których w haśle nie ma powinny się nam zapalić na czerwono.
+Dodatkowo obrazek szubienicy należy podmienić na następny z kolei.
+Z dorysowaną kolejną częścią szubienicy. 
+R: Wystarczy dokodować else do tego if'a.
+Skopiuj wszystkie 5 linii i zmień kolor na czerwony
+    else  {
+			var element = 'lit' + nr;    
+			document.getElementById(element).style.background = "#330000";
+			document.getElementById(element).style.color = "#C00000";
+			document.getElementById(element).style.border = "3px solid #C00000";
+			document.getElementById(element).style.cursor = "default";
+		}
+Sprawdź w przeglądarce:
+
+
+---
+Kolejną rzeczą jest dorysowanie szubienicy wtedy kiedy się pomyliliśmy. 
+TAk naprawdę chodzi o zmianę obrazka z dorysowanymi kolejnymi ele-
+mentami szubienicy. Masz 10 obrazków w katalogu img. 
+Są tam obrazki od s0 do s9 i mają rozszerzenie jpg. 
+W naszym kodzie obrazek siedzi w div'ie o id="szubienica".
+
+R: Podmień wewnętrzny HTML tego div'a ale musimy wiedzieć ile 
+skuch już nastąpiło, żeby załadować odpowiedni do stanu sytuacji obrazek.
+JS: Na górze kodu dodaj zmienną globalną: ile_skuch = 0; 	
+Na początku przypisz jej 0 bo zaczynamy od obrazka s0.jpg
+i od sytuacji że błędu jeszcze nie było. 
+    // skucha
+    ile_skuch++; 
+
+Zobacz że ilość skuch zasadniczo odpowiada nazwie pliku,
+bo mamy s0, s1, s2 itd.
+Zamień więc ten obrazek w div'ie szubienica. 
+    var obraz = "img/s"+ ile_skuch + ".jpg";
+    document.getElementById("szubienica").innerHTML = '<img src="'+obraz+'" alt="" />';
+
+Sprawdź w przeglądarce:
+Zobacz że dobrze działa ale jeszcze należy uchwycić moment 
+że popełnisz tak dużo błedów że obrazek o kolejnym numerze już nie będzie  
+istniał w folderze. Ostatnie nasz plik kótry jest dostępny to jest s9.jpg. 
+
+
+---
+Ale jeszcze jedna sprawa. Nieco groźniejszy bug:
+zobacz że klikanie w tą samą błędną (nie występującą w haśle) literkę
+powoduje że pojawiają się kolejne elementy szubienicy.
+Trzeba po zmianie koloru na czerwony zawiesić działanie onclick'a 
+tego div'a. Nie powinna nam się doliczać kolejna skucha.
+Jak osiągnąć taki efekt neutralizacji?
+R: Przez: setAttribute
+    document.getElementById(element).setAttribute("onclick",";");
+
+Sprawdź w przeglądarce:
+Wszystko dobrze działa.
+
+
+---
+Pozostaje nam już tylko okodować sytuację w której przegrywamy popełniając
+9 błedów albo wygrywamy rozgywkę odsłaniając całe hasło.
+Napisz kod obejmujące część z wygraną, czyli wtedy gdy hasło zostało 
+odsłonięte.
+Po odgadnięciu całego hasła zamień div'a alfabet na gratulację.
+Ustaw również reset przeglądarki po kliknięciu w span.  
+R: 
+		// wygrana
+		if (haslo == haslo1) {
+			document.getElementById("alfabet").innerHTML = 'Tak jest!!! Podano pawidłowe hasło: ' 
+			+ haslo + '<br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>' 
+		}
+
+
+Trzeba nam jeszcze wystylizować tego spana, bo będziemy mieli klasę o nazwie
+'reset'. Na pewno warto dać napisowi: 'JESZCZE RAZ?' cursor: pointer; 
+i jakiegoś hovera czyli efekt najechania.
+R: 
+		.reset	{
+			color: green;
+			cursor: pointer;
+			font-size: 48px;
+		}
+		.reset:hover{
+			color:white;
+		}
+
+
+---
+Napisz kod obejmujące część z przegraną, czyli wtedy gdy popełniliśmy 
+więcej niż 9 pomyłek.
+R: 
+		if (ile_skuch >= 9) {
+			document.getElementById("alfabet").innerHTML = 
+			'Przegrana!!! Pawidłowe hasło:<br />' 
+			+ haslo + 
+			'<br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>' 
+		}
+
+
+---
+Dodaj dzwięk przy kolorowaniu klikniętej literki na zielono
+albo na czerwono.
+R: Utwórz nowe dwie zmienne: 
+		var tak = new Audio("yes.wav");
+		var nie = new Audio("no.wav");
+
+Gdy literka znajduje się haśle to odtwarzamy ją przez:
+    tak.play();
+a jeśli nie ma to:
+    nie.play();
+
+
+---
+Gra jest zakończona.
+Gratulacje!!!!
+
+
+------------------------
+------------------------
+etap_6
+---
+Poprawienie kodu:
+
+
+
+---
+Dodatkowo:
+- moduł losujący hasło spośród co najmniej kilkunastu możliwych.
+	Można do tego wykorzystać funcję Math.Random() i tablice
+- dzwięki przy zakończeniu całej gry, przy wygranej i przegranej
+- skategoryzować hasła do odgadnięcia na np: przysłowia, film, książka. 
 
 
 

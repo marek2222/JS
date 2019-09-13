@@ -2,6 +2,11 @@ var haslo = "Bez pracy nie ma kołaczy";
 haslo = haslo.toUpperCase();
 
 var dlugosc = haslo.length; // - jest atrybutem (właściwością) 
+var ile_skuch = 0; 
+
+var tak = new Audio("yes.wav");
+var nie = new Audio("no.wav");
+
 var haslo1 = "";
 
 for (let i = 0; i < dlugosc; i++) {
@@ -79,10 +84,52 @@ String.prototype.ustawZnak = function(miejsce, znak){
 }
 
 function sprawdz(nr) {
+  var trafiona = false;   //trafiona literka
+
   for(var i=0; i<dlugosc; i++){
     if(haslo.charAt(i) == litery[nr]){
       haslo1 = haslo1.ustawZnak(i, litery[nr]);
+      trafiona = true;
     }
   }
-  pokaz_haslo();
+  if (trafiona == true) {
+    tak.play();
+    var element = 'lit' + nr;    
+    document.getElementById(element).style.background = "#003300";
+    document.getElementById(element).style.color = "#00C000";
+    document.getElementById(element).style.border = "3px solid #00C000";
+    document.getElementById(element).style.cursor = "default";
+    pokaz_haslo();  // pokazanie hasła
+  }
+  else  {
+    nie.play();
+    var element = 'lit' + nr;    
+    document.getElementById(element).style.background = "#330000";
+    document.getElementById(element).style.color = "#C00000";
+    document.getElementById(element).style.border = "3px solid #C00000";
+    document.getElementById(element).style.cursor = "default";
+    document.getElementById(element).setAttribute("onclick",";");
+
+    // skucha
+    ile_skuch++; 
+    var obraz = "img/s"+ ile_skuch + ".jpg";
+    document.getElementById("szubienica").innerHTML = '<img src="'+obraz+'" alt="" />';
+  }
+
+  // wygrana
+  if (haslo == haslo1) {
+    document.getElementById("alfabet").innerHTML = 
+    'Tak jest!!! Pawidłowe hasło:<br />' 
+    + haslo + 
+    '<br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>' 
+  }
+
+  // przegrana
+  if (ile_skuch >= 9) {
+    document.getElementById("alfabet").innerHTML = 
+    'Przegrana!!! Pawidłowe hasło:<br />' 
+    + haslo + 
+    '<br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>' 
+  }
 }
+ 
