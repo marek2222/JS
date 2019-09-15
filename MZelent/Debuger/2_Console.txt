@@ -1,0 +1,114 @@
+-----------------------
+Zakładka Console
+
+  Zakładka console służy do wypisywania komunikatów, odpalania tymczasowych 
+skryptów, wywoływania kawałków kodu itp. W naszych skryptach bardzo często
+będziemy chcieli coś wypisać - np. jakiś komunikat, daną zmienną, 
+dane elementu czy inną rzecz. Skorzystamy wtedy z instrukcji console.log, 
+która służy właśnie do wypisywania w konsoli debugera różnych rzeczy:
+
+console.log('Witaj świecie'); 
+  // tekst pojawi się w zakładce Console debugera
+
+console.log(window); 
+  // w zakładce console wypisze obiekt, który od razu będziemy mogli 
+  // zbadać klikając na strzałkę obok wypisanego obiektu
+
+console.log("Witaj", window, 100); 
+  //po przecinku możemy wypisać kilka elementów na raz
+
+  W wielu miejscach - nawet na tym kursie - będziesz chciał szybko sprawdzić
+działanie jakiegoś skryptu lub zmiennej. Wystarczy więc, że otworzysz 
+debugera (F12) i przejdziesz do zakładki konsoli (Console).
+Jeżeli skrypt udostępnia jakieś zmienne lub metody, możesz w konsoli 
+zacząć wpisywać ich nazwy, a debuger podpowie ci resztę.
+
+Cw. 
+Zadeklaruj zmienną: 
+    var mojaPierwszaSuperZmienna = 12
+
+Przejdź teraz do konsoli debugera i zacznij wpisywać:
+
+    mojaPie
+Debuger powinien podpowiedzieć tobie pełną nazwę zmiennej 
+mojaPierwszaSuperZmienna. Strzałka w prawo by dopełnić wpisywaną nazwę 
+i enter by wyświetlić w konsoli jej wartość. W konsoli powinna pojawić się 
+wartość tej zmiennej, czyli jakiś tekst. Jaki? Sprawdź sam. 
+Podobnie możesz zacząć wpisywać window, Math czy podobne globalnie 
+dostępne elementy.
+
+Nie wszystkie zmienne będziemy mogli tak badać. Jeżeli dana zmienna 
+jest ukryta przed zewnętrznym środowiskiem, nie zbadamy jej w powyższy sposób. 
+Ale wtedy spokojnie możemy użyć console.log() bezpośrednio w kodzie.
+
+Istnieje jeszcze kilka komend dla konsoli debugera:
+
+//tekst zwracający uwagę - pisany na żółtym tle i z wykrzyknikiem
+console.warn('Uwaga!');
+
+//tekst błędu - czerwony, na czerwonym tle
+console.error('Błąd!');
+
+//tekst informacyjny z ikonką info
+console.info('Informacja!');
+
+
+// bardzo często będziemy chcieli wypisać szczegóły elementu czy obiektu
+// przykładowo gdy wypiszemy element pobrany ze strony, to pokaże nam tylko 
+// jego znacznik w konsoli. Gdy chcemy wypisać więcej detali o tym obiekcie 
+// to użyjemy console.dir
+console.dir(someButton);
+
+//grupowanie wielu tekstów (console.log etc) w konsoli w jedną grupę
+    console.group('Nazwa grupy');
+    console.log('Ala ma kota');
+    console.log('Kot ma Alę');
+    console.groupEnd(); //kończenie grupy
+
+
+    console.groupCollapsed('Nazwa grupy'); //grupa domyślnie zwinięta
+    console.log('Ala ma kota');
+    console.log('Kot ma Alę');
+    console.groupEnd(); //kończenie grupy
+
+
+    console.table([1,2,3,4,5]); //do przyjemnego wypisywania tablicy
+
+
+//czasami będziemy chcieli sprawdzić jak szybko wykona się nasz skrypt...
+//rozpoczyna test - zaczyna liczyć czas
+    console.time('Pierwszy test'); 
+    for (let i=0; i<100000; i++) { ... }
+    //kończy test
+    console.timeEnd('Pierwszy test'); 
+
+
+// czasami też będziemy chcieli zatrzymać na chwilę działanie skryptu 
+// w danym miejscu
+    function test() {
+        let i = 0;
+        // instrukcją debugger przerywam działanie skryptu w tym miejscu, 
+        // dzięki czemu mogę spokojnie go badać w zakładce Source.
+        // Dodatkowo w konsoli mam dostęp do zmiennych z danego scope 
+        //  - np. je tam wpisując
+        debugger; 
+    }
+    test();
+
+
+Ważną cechą console.log jest to, że możemy w niej wypisywać 
+kilkanaście elementów po przecinkach. Dzięki temu nie będziemy 
+musieli się skupiać na typach:
+
+//zamiast
+console.log("Nazywam się " + myName);
+
+//lepiej użyć
+console.log("Nazywam się", myName);
+
+//lub
+console.log({myName : myName});
+
+
+W edytorze Visual Studio Code Warto zainstalować dodatek ES6 Code Snippets, 
+który dodaje nam skróty takie jak pokazał autor na StackOverflow

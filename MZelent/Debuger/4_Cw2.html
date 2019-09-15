@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Ćwiczenie 2 - Testowanie javascript</title>
+</head>
+<body>
+  <p>
+      <button class="button" id="btnTest4" style="width: 40px;">Klik</button>
+  </p>
+  <script>
+  {
+    const btn = document.querySelector('#btnTest4');
+    btn.addEventListener('click', function() {
+        console.log(`%c Przykładowy tekst`, 'font-size: 30px; color: tomato; background: yellow;')
+    });
+  }
+  </script>
+  
+
+</body>
+</html>

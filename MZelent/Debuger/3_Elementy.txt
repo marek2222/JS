@@ -1,0 +1,90 @@
+Zakładka Elements
+
+Poza konsolą będziemy bardzo często korzystać z innych zakładek.
+Pierwszą z nich jest zakładka Elements, która pozwala badać całą 
+strukturę dokumentu.
+
+Badany element możemy wybrać na kilka sposobów. Raz - wybierzemy go sobie 
+właśnie w zakładce Elements. Możemy się po niej poruszać klikając 
+na poszczególne elementy drzewka, lub posługując się strzałkami klawiatury
+(góra-dół, prawo-lewo rozwija i zwija element).
+
+Druga opcja to użycie pierwszej z lewej strony górnej belki debugera ikonki.
+Po jej wybraniu trzeba zaznaczyć badany element na stronie.
+
+
+Trzecia opcja to kliknięcie badanego elementu na stronie prawym klawiszem 
+myszki i wybranie opcji "zbadaj". Poza drzewem dokumentu zakładka Elements 
+pokazuje po prawej stronie style każdego elementu. Style pokazywane są 
+od dołu do góry. Te najbardziej aktualne (czyli występujące najniżej 
+w stylach) są pokazane wyżej.
+
+Na szarym tle pokazywane są style domyślne przeglądarki. 
+Jeżeli któraś z właściwości będzie przekreślona, znaczy to, że inny selektor
+w css ją nadpisał (ma większą moc, lub dane stylowanie jest niżej w CSS). 
+Czasami przy niektórych właściwościach mogą pojawić się wykrzykniki. 
+Oznacza to, że dana właściwość została źle napisana.
+
+
+Po kliknięciu każdej właściwości po prawej stronie możemy ją dynamicznie 
+zmieniać. Przy wartościach numerycznych możemy je zwiększać lub zmniejszać 
+za pomocą klawiszy strzałek góra-dół. Wystarczy postawić kursor 
+na danej wartości i strzałkami góra-dół zmienić jej wartość 
+(z shiftem taka zmiana następuje co 10).
+
+Przy niektórych właściwościach pojawiają się dodatkowe ikonki 
+  - np. służąca do wyboru koloru, lub do zmiany box-shadow.
+
+
+Kolejną bardzo ważną opcją jest :hov, który mieści się na górze z prawej 
+strony tej zakładki. Umożliwia on wymuszenie stanu na elemencie 
+- np. hover, focus, active itp. Bardzo ważna opcja przy tworzeniu 
+efektów np. dla przycisków
+
+Przećwiczmy powyższe informacje. Poniżej masz przycisk. 
+Klient zgłosił, że przycisk wygląda, jakby został stworzony przez podludzi. 
+Trzeba go poprawić.
+
+Spróbuj teraz go zbadać i zmień jego parametry według poniższych wytycznych
+klienta:
+
+Odstęp wewnętrzny (padding) ustaw na 20px 40px
+    Kolor przycisku (background) zmień na #e31a59
+    Kolor tekstu (color) zmień na #fff
+    Dodaj zaokrąglone rogi (border-radius) i ustaw je na 60px
+
+Dodatkowo korzystając z ikonki :hov zmień stylowanie przycisku 
+po najechaniu i ustaw mu parametry:
+    cień miał parametry: 0 2px 10px #7321f3
+    kolor tekstu : #000;
+    kolor tła przycisku: #7321f3
+
+
+Zanim przejdziemy dalej, warto tutaj wspomnieć o jeszcze jednej dość 
+przydatnej funkcjonalności. Wyobraźmy sobie, że po kliknięciu, najechaniu
+kursorem czy dowolnej innej czynności wykonywany jest jakiś kod Javascript.
+Skąd mamy jednak wiedzieć, gdzie ten kod się znajduje?
+
+Gdy jesteśmy w zakładce Elements i klikniemy na dowolny element na stronie, 
+pojawi nam się kontekstowe menu. Jedną z opcji jest "Break ok", która służy
+do zatrzymywania działania skryptów
+
+Menu kontekstowe po kliknięciu na element
+Poszczególne opcje oznaczają:
+
+- subtree modification - zatrzymaj działanie skryptów, gdy zmieni się 
+  struktura html danego elementu i jego zawartości 
+  (dzieci i zagnieżdżonych elementów)
+- attribute modifications - zatrzymaj skrypty, jeżeli zmieni się zawartość 
+  atrybutów danego elementu (np. skrypt zmieni style danego elementu)
+- node removal - zatrzymaj skrypt jeżeli dany element zostanie usunięty
+
+
+Sprawdźmy to na przykładzie.
+Poniżej mamy 3 przyciski. Pierwszy po kliknięciu zmienia tło. Drugi zmienia swoją zawartość html, a trzeci jest usuwany.
+Ustaw im odpowiednie "breake on". Zauważ, że po ustawieniu breake dla danego elementu, pojawi się przy nim w zakładce Elements niebieska kropka.
+
+niebieskie kropki przy oznaczonych elementach
+Zmień tło Zmień zawartość (0) Usuń mnie
+
+Zakładka Sources

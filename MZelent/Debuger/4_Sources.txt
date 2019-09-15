@@ -1,0 +1,78 @@
+Zakładka Sources
+
+Znajdziesz tutaj wszystkie kody dołączonych plików 
+- np. plików ze skryptami, stylami itp. wykorzystywanymi na danej stronie.
+
+Po lewej stronie tej zakładki masz listę plików. Po wybraniu danego pliku, 
+zobaczysz jego kod. Otwórz plik z rozszerzeniem .js.
+
+Jak widzisz, kod tego pliku jest zminimalizowany. Jeżeli chciałbyś 
+dokładniej go zbadać, musisz poprawić jego formatowanie. Służy do tego 
+ikonka {} (Preety print) znajdująca się tuż pod kodem.
+
+Po prawej stronie masz bardzo ważne ikonki służące do obsługi tak zwanych 
+breakpointów. 
+
+Co to jest? Nasz kod możemy badać nie tylko za pomocą console.log 
+(które to działa bardzo dobrze), ale też właśnie za pomocą breakpointów.
+
+
+Patrząc na kod JavaScript w zakładce Source możemy klikając na liniach 
+numerycznych zaznaczać linie, na których kod powinien się zatrzymać. 
+Po odświeżeniu strony wykonywanie kodu zatrzyma się we wskazanych miejscach.
+Od tej pory będziemy mogli badać każdą zmienną w kodzie. Wystarczy najechać
+na nią kursorem.
+
+
+Dla testu znajdź w tej zakładce otwórz plik .js i postaw tam kilka
+breakpointów. Następnie odśwież stronę i spróbuj pobadać kilka zmiennych.
+
+Badanie zmienynch w debugerze
+Po postawieniu breakpointów na liniach, odświeżeniu strony wczytywanie 
+strony się zatrzyma, a sama strona zostanie przykryta szarym tłem. 
+Zatrzymane miejsce będzie reprezentować niebieska linia w kodzie.
+Za pomocą kursora możesz teraz badać wszystkie zmienne. 
+Żeby wznowić działanie skryptów kliknij ikonkę play (pokazana powyżej) 
+lub naciśnij klawisz F8. Skrypt się wznowi i ewentualnie zatrzyma 
+na kolejnym breakpoincie.
+
+Jak widzisz poza ikonką wznawiającą działanie skryptów mamy też kilka innych.
+
+	Wznawia działanie kodu
+	Przeskakuje wywołanie kolejnej funkcji (nie wchodzi do jej wnętrza) lub zachowuje się jak przejście do kolejnego kroku
+	Przechodzi do wnętrza kolejnej funkcji, lub zachowuje się jak przejście do kolejnego kroku
+	Wychodzi z danej funkcji i przechodzi do kolejnej linii kodu (czyli poza linię, gdzie dana funkcja została wywołana)
+	Wyłącza na chwilę breakpointy. Pomocne gdy mamy nastawiane naście takich breakpointów i chcemy na chwilę sprawdzić jak się strona zachowuje bez zatrzymywania
+	Czy kod ma się zatrzymywać na błędach
+
+Kolejną ciekawą funkcjonalnością jest włączenie warunków dla danego breakpointu. 
+Jak widzisz, domyślnie breakpointy są oznaczone kolorem niebieskim. 
+Wyobraź sobie, że chciałbyś zbadać zmienną w pętli. Taka pętla wykonuje się
+1000 razy. Ty chciałbyś sprawdzić zmienną nie przy każdym przebiegu pętli 
+a tylko przy ostatniej iteracji pętli. Wystarczy więc dla takiego 
+breakpointu postawić warunek. Klikamy prawym przyciskiem myszki 
+na dany breakpoint i wybieramy "Edit breakpoint":
+
+Edycja breakpoint
+A następnie wpisujemy warunek, który musi być spełniony by dany breakpoint 
+działał. W przypadku powyższego zadania było by to i === tab.length-1. 
+Kolor breakpointa zmieni się na pomarańczowy i od tej pory kod będzie się 
+zatrzymywał w tym miejscu tylko wtedy gdy dany warunek zostanie spełniony.
+
+W przyszłości zapewne będziesz o wiele częściej korzystał z tej zakładki. 
+Polecam ci przejść tutorial na stronie 
+https://developers.google.com/web/tools/chrome-devtools/javascript/, 
+który fajnie naucza korzystania z tej zakładki.
+
+Zanim przejdziemy do kolejnej zakładki, spójrzmy jeszcze na jedną dość 
+ciekawą rzecz w tej zakładce. Po prawej stronie znajdują się kolekcje 
+breakpointów. Szczególnie przydatne jest używanie breakpointów dla zdarzeń
+(Event Listener Breakpoints). Poniżej mamy przykładowy przycisk. 
+Po jego kliknięciu odpalany jest kod wypisujący tekst w konsoli. 
+Żeby sprawdzić jaki kod jest odpalany, dodajmy w tej zakładce breakpoint 
+dla zdarzenia click, a następnie kliknijmy w przycisk:
+
+Klik
+
+
+
