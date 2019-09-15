@@ -1,0 +1,191 @@
+Strict mode
+
+Javascript jest językiem, który ewoluuje. Do języka tego dodawanych 
+jest wiele nowych rzeczy, równocześnie starsze rozwiązania w celach wstecznej
+kompatybilności nie za bardzo mogą być ruszane.
+
+Takich starych naleciałości można by wymienić przynajmniej naście. 
+Przykładowo jedną z nich jest możliwość odwoływania się do zmiennej globalnej
+(operowanie bezpośrednio na globalnym obiekcie) 
+bez jej wcześniejszego utworzenia za pomocą jednego ze słów kluczowych 
+(var/let/const):
+
+    myVariable = 102;
+    console.log(myVariable); //102
+
+Strict mode to funkcjonalność wprowadzona w ES5 (EcmaScript 2009), 
+która pozwala odpalać nasz skrypt w bardziej restrykcyjnym trybie 
+- tak zwanym "strict mode".
+Tryb ten charakteryzuje się bardziej lepszym podejściem do kodu, 
+eliminuje niektóre "ciche" błędy (takie, które nie są sygnalizowane 
+przez przeglądarkę), lepiej sygnalizuje powszechne kodowe wpadki, 
+czy sygnalizuje niebezpieczne operacje (jak pokazana powyżej).
+
+Domyślnie tryb ten jest wyłączony. Aby go włączyć, na początku naszego 
+kodu musimy użyć zapisu "use strict" lub 'use strict':
+
+    "use strict";   //ten kod będzie działał w nowszym środowisku
+
+
+Jak widzisz przełącznik ten jest zwykłym stringiem. Dzięki temu, 
+stare przeglądarki bez problemu poradzą sobie z takim kodem 
+- po prostu nie włączą strict mode.
+
+Taki tryb możemy włączać nie tylko dla całego kodu, 
+ale i dla poszczególnych funkcji umieszczając go na ich początku:
+
+    // kod bez strict-mode...
+
+    (function(){
+        "use strict";
+        // kod działający na strict-mode
+    })();
+
+    // kod bez strict-mode...
+
+
+
+Strict mode jest włączone domyślnie: 
+- gdy nasz kod piszemy z wykorzystaniem modułów w ES6 
+- gdy wykorzystujemy klasy
+
+
+W każdym bądź razie - dobrą praktyką jest rozpoczynać nasz kod od powyższego
+zapisu. Możemy tylko na tym zyskać.
+
+
+
+
+---------------------------------------------
+Różnice między "strict mode" a normalnym kodem
+---------------------------------------------
+Pierwsza różnica między tym trybem a klasycznym to wymieniony powyżej 
+brak możliwości używania zmiennych bez ich zadeklarowania:
+
+    test = 20;
+    console.log(test); //ok
+
+    "use strict";
+    test = 20; //error - test is not defined
+    console.log(test);
+
+
+Tyczy się to też dość często popełnianego błędu przez początkujących, 
+którzy mają w zwyczaju pomijanie słów kluczowych let przy pętlach:
+
+    "use strict";
+    for (el of elements) { //error - el is not defined
+        ...
+    }
+    for (i=0; i<10; i++) {//error - i is not defined
+        ...
+    }
+
+
+    "use strict";
+    for (const el of elements) { //ok
+        ...
+    }
+    for (let i=0; i<10; i++) {//ok
+        ...
+    }
+
+
+
+Kolejna różnica to sygnalizowanie błędu, gdy będziemy chcieli nadpisać 
+właściwości obiektu, które oznaczone są jako nie do zapisu, 
+lub nadpisać rzeczy, które nie nadają się do nadpisania. Tyczy się to 
+szczególnie zmiennych tworzonych za pomocą słowa var.
+
+    var top = "Nie wiem"; //window.top = "Nie wiem"
+    //powyższy kod nie zadziała, bo window.top zawiera bardzo ważną informację 
+      o tym, jakie okno jest na samej górze hierarchii (np. ramek)
+    console.log(top); //window
+
+    //inny przykład
+    NaN = 20;
+    console.log(NaN); //NaN
+
+
+    "use strict";
+    top = "Nie wiem"; //error: Cannot assign to read only property 'top' of object '#'
+
+    NaN = 20; //error
+    console.log(NaN);
+
+
+
+Usuwanie funkcji, zmiennych czy argumentów nie jest już możliwe. 
+Możemy usuwać tylko właściwości obiektów:
+
+    function test() {
+
+    }
+    let nr = 20;
+
+    delete test; //error - Delete of an unqualified identifier
+    delete nr; //error - Delete of an unqualified identifier
+
+    delete window.top //error - Cannot delete property 'top' of #
+
+
+
+
+Kolejna różnica to zabronione używanie słów kluczowych 
+przy tworzeniu zmiennych:
+
+    var let = 20;
+    console.log(let); //20
+
+    "use strict";
+    var let = 20; //Unexpected strict mode reserved word
+
+
+
+
+Dodatkowo nie możemy korzystać z instrukcji with 
+(którą umyślnie pomijam w kursie, bo i tak nikt z niej nie powinien korzystać).
+
+
+
+Kolejna zmiana jest taka, że parametry funkcji nie mogą się powtarzać:
+
+    function test(a, a) { //ok
+
+    }
+
+    "use strict";
+    function test(a, a) { //error - Duplicate parameter name not allowed in this context
+
+    }
+
+
+
+Deklarując liczby, nie możemy poprzedzać je cyfrą 0:
+
+    let nr = 020; //error : Octal literals are not allowed in strict mode.
+
+
+
+Kolejna zmiana tyczy się niechlubnej funkcji eval(), która służy 
+do uruchamiania kodu, który podajemy jako jej parametr w formie stringu:
+
+    eval("var x = 20; console.log(x);");
+
+
+
+W domyślnym trybie powyższy kod stworzył by zmienną x dla otaczającego 
+go scope:
+
+    var x = 10;
+    eval("var x = 20;");
+    console.log(x); //20
+
+
+
+W przypadku użycia "strict mode", kod wewnątrz eval tworzy swój własny scope 
+dla jego zmiennych:
+
+    var x = 10;
+    eval("var x = 20; console.log(x);"); //20
+    console.log(x); //10
