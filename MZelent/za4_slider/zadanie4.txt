@@ -28,8 +28,11 @@ W sekcji body dodaj diva do którego włożymy slidera:
 Utwórz funkcję zmienSlajd(),  dodaj znaczniki: <script></script> 
     <script type="text/javascript">
       function zmienSlajd()
-      { 
+      {
+        alert("asasa"); 
       }
+
+      zmienSlajd();
     </script>
 
 ----

@@ -1,12 +1,12 @@
 ----
-Generuj plik: zadanie2.html z szablonu 
+Generuj plik: zadanie1.html z szablonu 
 
 ----
 Wpisz w sekcji body pole tekstowe i przycisk:
 
     <body>
-      <input  type="text" >
-      <input type="submit" value="Sprawdź">
+      <input  type="text" />
+      <input type="submit" value="Sprawdź" />
     </body>
 
 ----
