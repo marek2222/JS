@@ -183,7 +183,7 @@ W funkcji start()
 	Zacznij od zrobienia pętli która wykona się 35 razy.
 	I w każdej iteracji dodamy jednego diva klasy .litera.
 	W stylach dodaj klasę .litera, gdzie: 
-		- wysookość i szerokść to 30px
+		- wysokość i szerokść to 30px
 		- jest wyśrodkowany text
 		- padding: 5px
 		- margines: 5
@@ -334,7 +334,7 @@ R: zabezpiecz się przez zbyt dużą wartością w parametrze: miejsce.
 Przykład: 
 		var napis = "HASŁO";
 		napis.ustawZnak(10,"A");
-Mamy napis w tórym mam 5 liter ale ustawZnak 
+Mamy napis w którym mam 5 liter ale ustawZnak 
 chce podmienić na 10 pozycji znak A. I mam problem.
 Dlatego sprawdź czy miejsce jest większe od długości napisu (this.lenght)
 a jeśli tak to zwróć ten właśnie łańcuch. 
@@ -409,7 +409,7 @@ Można to zrobić za pomocą flagi:
 
 R: Ustaw flagę w funkcji sprawdz(nr) i ustaw kolor tła na zielony: 
 		function sprawdz(nr) {
-			var trafiona = false;   //trafiona literka
+			var trafiona = false;   //nietrafiona literka
 
 			for(var i=0; i<dlugosc; i++){
 				if(haslo.charAt(i) == litery[nr]){

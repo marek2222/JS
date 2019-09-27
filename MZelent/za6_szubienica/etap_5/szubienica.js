@@ -113,7 +113,8 @@ function sprawdz(nr) {
     // skucha
     ile_skuch++; 
     var obraz = "img/s"+ ile_skuch + ".jpg";
-    document.getElementById("szubienica").innerHTML = '<img src="'+obraz+'" alt="" />';
+    document.getElementById("szubienica").innerHTML 
+      = '<img src="'+obraz+'" alt="" />';
   }
 
   // wygrana
@@ -121,15 +122,17 @@ function sprawdz(nr) {
     document.getElementById("alfabet").innerHTML = 
     'Tak jest!!! Pawidłowe hasło:<br />' 
     + haslo + 
-    '<br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>' 
+    '<br/><br/><span class="reset" '
+    +'onclick="location.reload()">JESZCZE RAZ?</span>' 
   }
 
   // przegrana
   if (ile_skuch >= 9) {
     document.getElementById("alfabet").innerHTML = 
-    'Przegrana!!! Pawidłowe hasło:<br />' 
+    'Przegrana!!! Pawidłowe hasło to:<br />' 
     + haslo + 
-    '<br/><br/><span class="reset" onclick="location.reload()">JESZCZE RAZ?</span>' 
+    '<br/><br/><span class="reset" onclick="location.reload()">'+
+    'JESZCZE RAZ?</span>' 
   }
 }
  

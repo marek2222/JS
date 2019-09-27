@@ -1,4 +1,4 @@
-var haslo = "Bez pracy nie ma kołaczy";
+let haslo = "Bez pracy nie ma kołaczy";
 haslo = haslo.toUpperCase();
 
 var dlugosc = haslo.length; // - jest atrybutem (właściwością) 
@@ -8,7 +8,6 @@ for (let i = 0; i < dlugosc; i++) {
   // haslo1 = (haslo[i] == " ") ? haslo1 + " ": haslo1+ "-";  
   haslo1 = (haslo.charAt(i) == " ") ? haslo1 + " ": haslo1+ "-";  
 }
-
 
 function pokaz_haslo() {
   document.getElementById("plansza").innerHTML = haslo1;
@@ -52,8 +51,8 @@ litery[29] = "W";
 litery[30] = "X";
 litery[31] = "Y";
 litery[32] = "Z";
-litery[33] = "Ż";
-litery[34] = "Ź";
+litery[33] = "Ź";
+litery[34] = "Ż";
 
 function start() {
   var tresc_diva = "";
